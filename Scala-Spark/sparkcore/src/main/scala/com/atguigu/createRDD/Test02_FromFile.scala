@@ -3,28 +3,29 @@ package com.atguigu.createRDD
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
+
 /**
- * @author yhm
- * @create 2021-09-23 14:18
+ * 由外部存储系统的数据集创建RDD包括：本地的文件系统，还有所有Hadoop支持的数据集，比如HDFS、HBase等
  */
 object Test02_FromFile {
-  def main(args: Array[String]): Unit = {
-    // 1. 创建spark配置对象
-    val conf: SparkConf = new SparkConf().setAppName("sparkCore").setMaster("local[*]")
+    def main(args: Array[String]): Unit = {
+        // 1. 创建spark配置对象
+        val conf: SparkConf = new SparkConf().setAppName("SparkCore").setMaster("local[*]")
 
-    // 2. 创建sparkContext
-    val sc = new SparkContext(conf)
+        // 2. 创建sparkContext
+        val sc = new SparkContext(conf)
 
-    // 3. 从文件系统创建RDD
-    val rdd: RDD[String] = sc.textFile("E:\\bigdate\\project\\sparkcore0625\\input")
+        // 3. 从文件系统创建RDD
+        // 3.1 本地文件系统
+        //val rdd: RDD[String] = sc.textFile("D:\\RepCode\\IdeaProjects\\BigData\\Scala-Spark\\sparkcore\\input\\1.txt")
+        val rdd: RDD[String] = sc.textFile("D:\\RepCode\\IdeaProjects\\BigData\\Scala-Spark\\sparkcore\\input\\*")
+        // 3.2 HDFS文件系统
+        //val rdd: RDD[String] = sc.textFile("hdfs://hadoop102:8020/input")
 
-    val rdd1: RDD[String] = sc.textFile("hdfs://hadoop102:8020/input")
+        // 4. 打印
+        rdd.foreach(println)
 
-    rdd1.collect().foreach(println)
-
-
-
-    // 4. 关闭sc
-    sc.stop()
-  }
+        // 5. 关闭sc
+        sc.stop()
+    }
 }
