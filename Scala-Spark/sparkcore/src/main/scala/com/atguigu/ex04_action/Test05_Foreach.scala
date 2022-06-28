@@ -1,13 +1,13 @@
-package com.atguigu.action
+package com.atguigu.ex04_action
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
  * @author yhm
- * @create 2021-09-25 14:04
+ * @create 2021-09-25 14:33
  */
-object Test01_Reduce {
+object Test05_Foreach {
   def main(args: Array[String]): Unit = {
     // 1. 创建spark配置对象
     val conf: SparkConf = new SparkConf().setAppName("sparkCore").setMaster("local[*]")
@@ -15,14 +15,13 @@ object Test01_Reduce {
     // 2. 创建sparkContext
     val sc = new SparkContext(conf)
 
-    val intRDD: RDD[Int] = sc.makeRDD(List(1, 2, 3, 4, 5, 6, 7), 2)
+    val intRDD: RDD[Int] = sc.makeRDD(1 to 100, 10)
 
-    // 行动算子reduce
-    val i: Int = intRDD.reduce(_ - _)
-    println(i)
+    // 收集数据为数组  绝对有序
+//    intRDD.collect().foreach(println)
 
-    // 行动算子collect
-    println(intRDD.collect().toList)
+    // 调用行动算子foreach
+    intRDD.foreach(println)
 
     // 4. 关闭sc
     sc.stop()
