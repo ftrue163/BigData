@@ -1,4 +1,4 @@
-package com.atguigu.broadcast
+package com.atguigu.ex11_broadcast
 
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.rdd.RDD

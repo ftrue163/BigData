@@ -1,4 +1,4 @@
-package com.atguigu.serializable
+package com.atguigu.ex05_serializable
 
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD

@@ -1,4 +1,4 @@
-package com.atguigu.ReadAndSave
+package com.atguigu.ex09_readandsave
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}

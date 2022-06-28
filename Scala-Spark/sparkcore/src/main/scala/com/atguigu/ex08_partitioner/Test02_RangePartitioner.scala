@@ -1,4 +1,4 @@
-package com.atguigu.partitioner
+package com.atguigu.ex08_partitioner
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
@@ -7,7 +7,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * @author yhm
  * @create 2021-09-27 11:13
  */
-object Test01_Partitioner {
+object Test02_RangePartitioner {
   def main(args: Array[String]): Unit = {
     // 1. 创建spark配置对象
     val conf: SparkConf = new SparkConf().setAppName("sparkCore").setMaster("local[*]")
@@ -25,16 +25,17 @@ object Test01_Partitioner {
     println(tupleRDD.partitioner)
 
     // 如果是分组聚合的话 使用的是hash分区器
-    val reduceRDD: RDD[(String, Int)] = tupleRDD.reduceByKey(_ + _,2)
-    println(reduceRDD.partitioner)
-
-    val groupRDD: RDD[(String, Iterable[Int])] = reduceRDD.groupByKey(2)
+//    val reduceRDD: RDD[(String, Int)] = tupleRDD.reduceByKey(_ + _,2)
+//    println(reduceRDD.partitioner)
+//
+//    val groupRDD: RDD[(String, Iterable[Int])] = reduceRDD.groupByKey(2)
 
     // 如果使用排序 使用的是范围分区器
-//    val sortRDD: RDD[(String, Int)] = tupleRDD.sortByKey()
-//    println(sortRDD.partitioner)
+    val sortRDD: RDD[(String, Int)] = tupleRDD.sortByKey()
+    println(sortRDD.partitioner)
 
-    groupRDD.collect()
+    // 只使用一个行动算子
+    sortRDD.collect()
 
 
     Thread.sleep(650000)

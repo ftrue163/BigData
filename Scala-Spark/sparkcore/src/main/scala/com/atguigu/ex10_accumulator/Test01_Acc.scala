@@ -1,4 +1,4 @@
-package com.atguigu.acc
+package com.atguigu.ex10_accumulator
 
 import java.lang
 

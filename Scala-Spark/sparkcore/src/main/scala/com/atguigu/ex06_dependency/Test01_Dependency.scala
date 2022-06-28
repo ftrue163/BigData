@@ -1,4 +1,4 @@
-package com.atguigu.dependency
+package com.atguigu.ex06_dependency
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
