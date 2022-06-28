@@ -45,7 +45,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.atguigu.spark.WordCount</mainClass>
+                            <mainClass>com.atguigu.ex00_wordcount.WordCount</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

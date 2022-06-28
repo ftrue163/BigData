@@ -1,4 +1,4 @@
-package com.atguigu.partition
+package com.atguigu.ex02_partition
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
