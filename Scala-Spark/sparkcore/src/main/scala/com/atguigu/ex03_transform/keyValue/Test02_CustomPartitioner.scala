@@ -1,4 +1,4 @@
-package com.atguigu.keyValue
+package com.atguigu.ex03_transform.keyValue
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{Partitioner, SparkConf, SparkContext}

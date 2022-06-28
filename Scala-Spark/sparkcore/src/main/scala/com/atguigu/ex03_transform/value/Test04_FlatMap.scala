@@ -1,4 +1,4 @@
-package com.atguigu.value
+package com.atguigu.ex03_transform.value
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
