@@ -1,14 +1,14 @@
 package com.atguigu.ex04_action
 
-import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.rdd.RDD
 
 
 /**
- * 函数签名：def reduce(f: (T, T) => T): T
- * 功能说明：f函数聚集RDD中的所有元素，先聚合分区内数据，再聚合分区间数据。
+ * 函数签名：def fold(zeroValue: T)(op: (T, T) => T): T
+ * 函数说明：折叠操作，aggregate的简化操作，即分区内逻辑和分区间逻辑相同。
  */
-object Test01_Reduce {
+object Test08_Fold {
     def main(args: Array[String]): Unit = {
         //1.创建SparkConf并设置App名称
         val conf: SparkConf = new SparkConf().setAppName("SparkCoreTest").setMaster("local[*]")
@@ -18,11 +18,12 @@ object Test01_Reduce {
 
         //3具体业务逻辑
         //3.1 创建第一个RDD
-        val rdd: RDD[Int] = sc.makeRDD(List(1, 2, 3, 4))
+        val rdd: RDD[Int] = sc.makeRDD(List(1, 2, 3, 4), 2)
 
-        //3.2 聚合数据
-        val reduceResult: Int = rdd.reduce(_ + _)
-        println(reduceResult)
+        //3.2 将该RDD所有元素相加得到结果
+        //val foldResult: Int = rdd.fold(0)(_ + _)
+        val foldResult: Int = rdd.fold(10)(_ + _)
+        println(foldResult)
 
         //4.关闭连接
         sc.stop()

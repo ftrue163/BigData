@@ -5,10 +5,10 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 
 /**
- * 函数签名：def reduce(f: (T, T) => T): T
- * 功能说明：f函数聚集RDD中的所有元素，先聚合分区内数据，再聚合分区间数据。
+ * 函数签名：def collect(): Array[T]
+ * 功能说明：在驱动程序中，以数组Array的形式返回数据集的所有元素。
  */
-object Test01_Reduce {
+object Test02_Collect {
     def main(args: Array[String]): Unit = {
         //1.创建SparkConf并设置App名称
         val conf: SparkConf = new SparkConf().setAppName("SparkCoreTest").setMaster("local[*]")
@@ -20,9 +20,8 @@ object Test01_Reduce {
         //3.1 创建第一个RDD
         val rdd: RDD[Int] = sc.makeRDD(List(1, 2, 3, 4))
 
-        //3.2 聚合数据
-        val reduceResult: Int = rdd.reduce(_ + _)
-        println(reduceResult)
+        //3.2 收集数据到Driver
+        rdd.collect().foreach(println)
 
         //4.关闭连接
         sc.stop()
