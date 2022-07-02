@@ -33,22 +33,8 @@ object Test01_Serializable {
 
         val userRDD1: RDD[User] = sc.makeRDD(List(user1, user2))
 
-        //3.1 打印，ERROR报java.io.NotSerializableException
+        //3 如果User类没有序列化，则报错：java.io.NotSerializableException
         userRDD1.foreach(println)
-
-        //3.2 打印，RIGHT
-        //val userRDD2: RDD[User] = sc.makeRDD(List())
-        //userRDD2.foreach(user => println(user.name))
-
-        //3.3 打印，ERROR Task not serializable 注意：没执行就报错了
-        //userRDD2.foreach(user => println(user1.name))
-
-
-        /*val list = List(new Person("zhangsan"), new Person("lisi"))
-
-        val personRDD: RDD[Person] = sc.makeRDD(list, 2)
-
-        personRDD.foreach(p => println(p.name))*/
 
         //4.关闭sc
         sc.stop()
@@ -65,17 +51,4 @@ object Test01_Serializable {
         var name: String = _
         override def toString: String = s"User($name)"
     }*/
-
-
-    // 主构造器参数
-    // val 前缀 将name变为一个属性
-    // 如果在spark中传递  需要进行序列化 不然报错
-    // 1: 实现序列化接口
-    //  class Person(val name:String) extends Serializable {
-    //  }
-
-    // 2: 使用样例类
-    // 样例类中的参数  默认就是val的属性
-    //case class Person(name: String)
-
 }
